@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    container_name: wiki_searcher
+    ports:
+      - 5000:5000
+    links:
+      - db
+    depends_on:
+      - db
+  db:
+    image: mongo:7.0
+    container_name: mongodb-wiki
+    ports:
+      - 27017:27017
+    restart: always
+    volumes:
+      - ./mongodb:/data/db
+
+volumes:
+  mongodb-data:
+    driver: local

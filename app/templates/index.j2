@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wiki searcher</title>
+    <style>
+        /* Add your custom CSS styles here */
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Title bar styles */
+        .title-bar {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center; /* Center the title */
+            position: relative; /* For positioning the dropdown */
+        }
+
+        .title-bar h1 {
+            margin: 0;
+        }
+
+        /* Dropdown styles */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #3d3535;
+            border-radius: 5px;
+            padding: 20px;
+            height: 400px;
+            width: 400px;
+            display: none; /* Hide the dropdown by default */
+        }
+
+        .title-bar:hover .dropdown {
+            display: block; /* Show the dropdown on hover */
+        }
+
+        /* Search bar styles */
+        .search-bar {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center; /* Center the search bar */
+        }
+
+        .search-bar form {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar input[type="text"] {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            width: 200px;
+        }
+
+        .search-bar button {
+            padding: 5px 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        /* Button styles */
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        /* Button hover effect */
+        .button:hover {
+            background-color: #555;
+        }
+
+        /* Button container styles */
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center; /* Center the buttons */
+        }
+
+        /* Card field styles */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Automatically fit the cards with a minimum width of 300px */
+            grid-gap: 20px;
+            margin: 20px;
+        }
+
+        .card {
+            background-color: #f2f2f2;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="title-bar">
+        <h1>Wiki searcher</h1>
+        <div class="dropdown">
+            <h2>Dropdown Title</h2>
+            <p>This is a sample dropdown page.</p>
+        </div>
+    </div>
+    
+    <div class="search-bar">
+        <form action="/search" method="GET">
+            <input type="text" name="query" placeholder="Search...">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    
+    <div class="button-container">
+        <a href="button1.url" class="button"></a>
+        <a href="button2.url" class="button"></a>
+        <a href="button3.url" class="button"></a>
+        <a href="button4.url" class="button"></a>
+    </div>
+    
+    <div class="card-container">
+        <div class="card">
+            <a href="url">
+                <h2>Card Title 1</h2>
+            </a>
+            <p>Text for Card 1</p>
+        </div>
+        <div class="card">
+            <a href="url">
+                <h2>Card Title 2</h2>
+            </a>
+            <p>Text for Card 2</p>
+        </div>
+        <div class="card">
+            <a href="url">
+                <h2>Card Title 3</h2>
+            </a>
+            <p>Text for Card 3</p>
+        </div>
+    </div>
+    <div class="card-container">
+        <div class="card">
+            <a href="url">
+                <h2>Card Title 4</h2>
+            </a>
+            <p>Text for Card 4</p>
+        </div>
+        <div class="card">
+            <a href="url">
+                <h2>Card Title 5</h2>
+            </a>
+            <p>Text for Card 5</p>
+        </div>
+    </div>
+</body>
+</html>
