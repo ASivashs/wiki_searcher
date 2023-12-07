@@ -37,7 +37,7 @@ def highlight_content(content: str, word: str) -> str:
         content = content.split()
     for element in range(len(content)):
         if word == content[element]:
-            print("Highlight", content[element])
+            logger.info(f"Highlighted word {content[element]}")
             content[element] = f"<b>{content[element]}</b>"
     content = " ".join(content)
     return content
@@ -71,10 +71,6 @@ def find_on_wiki_or(query: list) -> bool | list:
                 joined_result[0]["content"], 
                 separated
             )
-            joined_result[0]["title"] = highlight_content(
-                joined_result[0]["title"], 
-                separated
-            )
         result.append(joined_result)
 
     for element in query:
@@ -87,10 +83,6 @@ def find_on_wiki_or(query: list) -> bool | list:
                 )
                 pages["content"] = highlight_content(
                     pages["content"], 
-                    separated
-                )
-                pages["title"] = highlight_content(
-                    pages["title"], 
                     separated
                 )
                 pages["Words"] = query
@@ -147,10 +139,6 @@ def find_on_wiki_joined(query: list, separated_words: list) -> bool | list:
                         page["content"], 
                         separated
                     )
-                    page["title"] = highlight_content(
-                        page["title"], 
-                        separated
-                    )
                 json_pages.append(page)
                 
             separate_result = [True]
@@ -174,10 +162,6 @@ def find_on_wiki_joined(query: list, separated_words: list) -> bool | list:
                     )
                     page["content"] = highlight_content(
                         page["content"], 
-                        separated
-                    )
-                    page["title"] = highlight_content(
-                        page["title"], 
                         separated
                     )
                 json_pages.append(page)
