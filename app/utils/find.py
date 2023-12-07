@@ -1,3 +1,5 @@
+from utils.get_wikipedia_data import find_on_wiki_and, find_on_wiki_or
+
 
 str_to_token = {
     '1': True,
@@ -8,6 +10,7 @@ str_to_token = {
     '(': '(',
     ')': ')'
 }
+empty_res = True
 
 
 def create_token_lst(s, str_to_token=str_to_token):
@@ -100,3 +103,59 @@ def find_in_dir(text):
             new_words_list = [el for el, _ in groupby(words_list)]
             if RSV:
                 print("Файл: " + os.path.abspath(os.path.join(root, name)) + "\nСписок присутствующих слов: " + str(new_words_list))
+
+
+def find_words(query):
+    query = query.split(")")
+    result = []
+    for query_element in query:
+        if "AND" in query_element:
+            query_words = query_element.split("AND")
+            query_words = [_.strip() for _ in query_words]
+            query_words = [_.strip('(') for _ in query_words]
+            search_result = find_on_wiki_and(query_words)
+            if search_result:
+                result.append(search_result)
+        if "OR" in query_element:
+            query_words = query_element.split("OR")
+            query_words = [_.strip() for _ in query_words]
+            query_words = [_.strip('(') for _ in query_words]
+            search_result = find_on_wiki_or(' '.join(query_words).split())
+            if search_result:
+                result.append(search_result)
+    return result
+
+
+def find_word_in_content(text: str, page):
+    result = 0
+    if word in page:
+        result = 1
+        words_list.append(word)
+    return str(result)
+
+
+def find_word_in_title(text: str, page):
+    result = 0
+    if word in page:
+        result = 1
+        words_list.append(word)
+    return str(result)
+
+
+def find_wiki(text):
+    words_list=[]
+    pattern = re.compile('\'(.*?)\'', re.S)
+    file_search_str = re.sub(pattern, lambda m: find_word_in_page(m.group()[1:-1], words_list=words_list), text)
+    RSV = nested_bool_eval(file_search_str)
+    new_words_list = [el for el, _ in groupby(words_list)]
+    
+    wiki_pages = search_pages("obama")
+    if len(wiki_pages) == 0:
+        return 
+    json_pages = []
+    for page in wiki_pages:
+        wiki_json_page = jsonify_wikipedia_page_content(page)
+        if wiki_json_page:
+            json_pages.append(wiki_json_page)
+
+    return json_pages

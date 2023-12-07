@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+    <style>
+        /* CSS styles go here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        /* Add more styles as needed */
+    </style>
+</head>
+<body>
+    <h1>{{ page_info["title"] }}</h1>
+    <img src="{{page_info['images'][0]}}", alt="No photos">
+    <p>URL: <a href="{{ page_info['url'] }}">{{ page_info["url"] }}</a></p>
+    <h2>Summary (AI Generated):</h2>
+    <p>{{ page_info["summary_ai"] }}</p>
+    <h2>Content:</h2>
+    <p>{{ page_info["content"] }}</p>
+    <h2>Summary:</h2>
+    <p>{{ page_info["summary"] }}</p>
+</body>
+</html>

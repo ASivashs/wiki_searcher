@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Metrics</title>
+        <style>
+            /* CSS styles go here */
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f1f1f1;
+                margin: 0;
+                padding: 20px;
+            }
+            h1 {
+                color: #333;
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Metrics</h1>
+        <table>
+            <tr>
+                <th>Metric</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Precision</td>
+                <td>{{ metrics["precision"] }}</td>
+            </tr>
+            <tr>
+                <td>Recall</td>
+                <td>{{ metrics["recall"] }}</td>
+            </tr>
+            <tr>
+                <td>Accuracy</td>
+                <td>{{ metrics["accuracy"] }}</td>
+            </tr>
+            <tr>
+                <td>Error</td>
+                <td>{{ metrics["error"] }}</td>
+            </tr>
+            <tr>
+                <td>F-measure</td>
+                <td>{{ metrics["f_measure"] }}</td>
+            </tr>
+            <tr>
+                <td>Average Metrics</td>
+                <td>{{ metrics["average_metrics"] }}</td>
+            </tr>
+        </table>
+        <h2>TREC Graph</h2>
+        <img src="{{ image_file }}" alt="TREC Graph">
+    </body>
+</html>
