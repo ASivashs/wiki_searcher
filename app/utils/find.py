@@ -105,6 +105,7 @@ def find_in_dir(text):
                 print("Файл: " + os.path.abspath(os.path.join(root, name)) + "\nСписок присутствующих слов: " + str(new_words_list))
 
 
+###################################
 def find_words(query):
     query = query.split(")")
     result = []

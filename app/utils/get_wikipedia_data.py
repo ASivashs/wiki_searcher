@@ -36,8 +36,9 @@ def highlight_content(content: str, word: str) -> str:
     if isinstance(content, str):
         content = content.split()
     for element in range(len(content)):
-        if content[element] == word:
-            content[element] = f"<b>{word}</b>"
+        if word == content[element]:
+            print("Highlight", content[element])
+            content[element] = f"<b>{content[element]}</b>"
     content = " ".join(content)
     return content
 
@@ -61,12 +62,37 @@ def find_on_wiki_or(query: list) -> bool | list:
     
     if joined_result:
         joined_result[0]["Words"] = query
+        for separated in query:
+            joined_result[0]["summary"] = highlight_content(
+                joined_result[0]["summary"], 
+                separated
+            )
+            joined_result[0]["content"] = highlight_content(
+                joined_result[0]["content"], 
+                separated
+            )
+            joined_result[0]["title"] = highlight_content(
+                joined_result[0]["title"], 
+                separated
+            )
         result.append(joined_result)
 
     for element in query:
         element_result = find_on_wiki(element)
         for pages in element_result:
             if pages:  
+                pages["summary"] = highlight_content(
+                    pages["summary"], 
+                    separated
+                )
+                pages["content"] = highlight_content(
+                    pages["content"], 
+                    separated
+                )
+                pages["title"] = highlight_content(
+                    pages["title"], 
+                    separated
+                )
                 pages["Words"] = query
                 result.append(pages)
     
@@ -94,7 +120,7 @@ def find_on_wiki_joined(query: list, separated_words: list) -> bool | list:
             if " ".join(separated_words) == page["title"]:
                 page["title"] = highlight_content(
                     page["title"], 
-                    separated
+                    " ".join(separated_words)
                 )
                 json_pages.append(page)
                 
@@ -112,6 +138,19 @@ def find_on_wiki_joined(query: list, separated_words: list) -> bool | list:
                     separate_result_content.append(False)
                     break
             if all(separate_result_content):
+                for separated in separated_words:
+                    page["summary"] = highlight_content(
+                        page["summary"], 
+                        separated
+                    )
+                    page["content"] = highlight_content(
+                        page["content"], 
+                        separated
+                    )
+                    page["title"] = highlight_content(
+                        page["title"], 
+                        separated
+                    )
                 json_pages.append(page)
                 
             separate_result = [True]
@@ -128,6 +167,19 @@ def find_on_wiki_joined(query: list, separated_words: list) -> bool | list:
                     separate_result.append(False)
                     break
             if all(separate_result):
+                for separated in separated_words:
+                    page["summary"] = highlight_content(
+                        page["summary"], 
+                        separated
+                    )
+                    page["content"] = highlight_content(
+                        page["content"], 
+                        separated
+                    )
+                    page["title"] = highlight_content(
+                        page["title"], 
+                        separated
+                    )
                 json_pages.append(page)
     
     return json_pages
