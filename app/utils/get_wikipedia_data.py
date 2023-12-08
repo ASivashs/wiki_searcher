@@ -26,7 +26,7 @@ def jsonify_wikipedia_page_content(wiki_page_name: str) -> dict | None:
         "url": wiki_page.url,
         "content": wiki_page.content,
         "summary": wiki_page.summary,
-        "images": wiki_page.images,
+        # "images": wiki_page.images,
     }
     logger.info(f"The following page was found: \"{response['title']}\".")
     return response

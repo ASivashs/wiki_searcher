@@ -68,43 +68,6 @@ def nested_bool_eval(s):
     return formatted_bool_eval(create_token_lst(s))
 
 
-def find_word(word):
-    os.chdir("D:\\BSUIR\\ЕЯИИС\\LR1")
-    result = 0
-    for root, dirs, files in os.walk(".", topdown=False):
-        for name in files:
-            with io.open(os.path.join(root, name), encoding='utf-8') as file:
-                for line in file:
-                    if word in line:
-                        result = 1
-                        # print(os.path.join(root, name))
-    return str(result)
-
-
-def find_word_in_file(file, word, words_list):
-    result = 0
-    with io.open(file, encoding='utf-8') as file:
-        for line in file:
-            if word in line:
-                result = 1
-                words_list.append(word)
-                # print(os.path.join(root, name))
-    return str(result)
-
-
-def find_in_dir(text):
-    os.chdir("D:\\BSUIR\\ЕЯИИС\\LR1")
-    for root, dirs, files in os.walk(".", topdown=False):
-        for name in files:
-            words_list=[]
-            pattern = re.compile('\'(.*?)\'', re.S)
-            file_search_str = re.sub(pattern, lambda m: find_word_in_file(os.path.join(root, name), m.group()[1:-1], words_list=words_list), text)
-            RSV = nested_bool_eval(file_search_str)
-            new_words_list = [el for el, _ in groupby(words_list)]
-            if RSV:
-                print("Файл: " + os.path.abspath(os.path.join(root, name)) + "\nСписок присутствующих слов: " + str(new_words_list))
-
-
 ###################################
 def find_words(query):
     query = query.split(")")
@@ -141,22 +104,3 @@ def find_word_in_title(text: str, page):
         result = 1
         words_list.append(word)
     return str(result)
-
-
-def find_wiki(text):
-    words_list=[]
-    pattern = re.compile('\'(.*?)\'', re.S)
-    file_search_str = re.sub(pattern, lambda m: find_word_in_page(m.group()[1:-1], words_list=words_list), text)
-    RSV = nested_bool_eval(file_search_str)
-    new_words_list = [el for el, _ in groupby(words_list)]
-    
-    wiki_pages = search_pages("obama")
-    if len(wiki_pages) == 0:
-        return 
-    json_pages = []
-    for page in wiki_pages:
-        wiki_json_page = jsonify_wikipedia_page_content(page)
-        if wiki_json_page:
-            json_pages.append(wiki_json_page)
-
-    return json_pages
