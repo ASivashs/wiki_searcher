@@ -2,7 +2,7 @@ import wikipedia
 from utils.logger import logger
 
 
-def search_pages(word: str, lang: str="en") -> list | None:
+def search_pages(word: str, lang: str="ru") -> list | None:
     wikipedia.set_lang(lang)
     wiki_pages = wikipedia.search(word)
     if len(wiki_pages) == 0:
@@ -26,7 +26,7 @@ def jsonify_wikipedia_page_content(wiki_page_name: str) -> dict | None:
         "url": wiki_page.url,
         "content": wiki_page.content,
         "summary": wiki_page.summary,
-        # "images": wiki_page.images,
+        "images": wiki_page.images,
     }
     logger.info(f"The following page was found: \"{response['title']}\".")
     return response
